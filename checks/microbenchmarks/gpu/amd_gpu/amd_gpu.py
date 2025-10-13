@@ -12,10 +12,14 @@ class AmdGPUBenchmarks(rfm.RegressionTest):
     Base class for amd-gpu-benchmarks
     '''
     maintainers = ['SSA']
-    sourcesdir = 'https://github.com/eth-cscs/amd-gpu-benchmarks.git'
+    sourcesdir = None
+    ''
     valid_prog_environs = ['+rocm', '+prgenv +cuda']
     valid_systems = ['+remote']
     build_system = 'CMake'
+    prebuild_cmds = [
+            'git clone -b reframe-ci https://github.com/eth-cscs/amd-gpu-benchmarks.git'
+    ]
     time_limit = '2m'
     build_locally = False
     tags = {'production', 'uenv'}
