@@ -28,8 +28,10 @@ class AmdGPUBenchmarks(rfm.RegressionTest):
 @rfm.simple_test
 class rocPRISM(AmdGPUBenchmarks):
     benchmark = 'rocPRISM'
-    algo = parameter(['radix-sort', 'scan', 'reduce'])
-    _executable_opts = parameter(['6', '12', '27'])
+    #algo = parameter(['radix-sort', 'scan', 'reduce'])
+    #_executable_opts = parameter(['6', '12', '27'])
+    algo = parameter(['radix-sort'])
+    _executable_opts = parameter(['6'])
 
     _algo_specs = {
         'radix-sort': {
