@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
+import os
 import reframe as rfm
 import reframe.utility.sanity as sn
 
@@ -18,7 +19,7 @@ class AmdGPUBenchmarks(rfm.RegressionTest):
     valid_systems = ['+remote']
     build_system = 'CMake'
     prebuild_cmds = [
-            'git clone -b reframe-ci https://github.com/eth-cscs/amd-gpu-benchmarks.git'
+            'git clone --depth 1 -b reframe-ci https://github.com/eth-cscs/amd-gpu-benchmarks.git'
     ]
     time_limit = '2m'
     build_locally = False
@@ -93,7 +94,7 @@ class rocPRISM(AmdGPUBenchmarks):
 
     @run_before('run')
     def set_executable(self):
-        self.executable = f'{self.build_system.builddir}/{self.algo}'
+        self.executable = os.path.join(self.build_system.srcdir, self.build_system.builddir, self.algo)
         self.executable_opts = [self._executable_opts]
 
     @run_before('sanity')
