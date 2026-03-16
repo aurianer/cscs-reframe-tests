@@ -450,12 +450,10 @@ class PyTorchMegatronLM_AMD_Optimized_CE(PyTorchMegatronLM_AMD_Optimized, Contai
     valid_systems = ['+amdgpu +ce']
     valid_prog_environs = ['builtin']
     maintainers = ['VCUE', 'SSA']
-    pytorch_image = fixture(pytorch_image_import, scope='session')
+    container_image = 'rocm/megatron-lm:v25.5_py312'
 
     @run_after('setup')
     def set_container_config(self):
-        self.container_image = os.path.join(self.pytorch_image.stagedir,
-                                            self.pytorch_image.archive_name)
         self.container_env_table = {
             'annotations.com.hooks': {
                 'aws_ofi_nccl.enabled': 'true',
